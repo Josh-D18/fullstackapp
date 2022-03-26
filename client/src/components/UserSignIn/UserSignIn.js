@@ -1,25 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import URL from "../../config";
+import { UserContext } from "../Context/index";
 
 export default function UserSignIn() {
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
 
+  const { actions } = useContext(UserContext);
+  console.log(actions);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios
-      .get(`${URL}/api/users`, {
-        auth: {
-          username: emailAddress,
-          password: password,
-        },
-      })
-      .then((res) => console.log(res))
-      .catch((error) => {
-        console.log({ error });
-      });
+    actions.signIn(emailAddress, password);
   };
 
   const handleChange = (e) => {
