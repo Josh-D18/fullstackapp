@@ -1,10 +1,11 @@
-import React, { useState, createContext } from "react";
+import { useNavigate } from "react-router-dom";
+import React, { createContext } from "react";
 import axios from "axios";
 import URL from "../../config";
 export const UserContext = createContext();
 
 export const Provider = (props) => {
-  const [userData, setUserData] = useState();
+  const navigate = useNavigate();
 
   const signIn = async (emailAddress, password) => {
     await axios
@@ -15,12 +16,12 @@ export const Provider = (props) => {
         },
       })
       .then((res) => {
-        setUserData(res.data);
-        if (userData) {
-          sessionStorage.setItem("Name", userData[0].firstName);
-          sessionStorage.setItem("Email", userData[0].emailAddress);
-          sessionStorage.setItem("isAuthenticated", true);
-        }
+        sessionStorage.setItem("firstName", res.data[0].firstName);
+        sessionStorage.setItem("lastName", res.data[0].lastName);
+        sessionStorage.setItem("Email", res.data[0].emailAddress);
+        sessionStorage.setItem("id", res.data[0].id);
+        sessionStorage.setItem("isAuthenticated", true);
+        navigate("/");
       })
       .catch((error) => {
         console.log({ error });
@@ -28,9 +29,11 @@ export const Provider = (props) => {
   };
 
   const signOut = () => {
-    sessionStorage.removeItem("Name");
+    sessionStorage.removeItem("firstName");
+    sessionStorage.removeItem("lastName");
     sessionStorage.removeItem("Email");
     sessionStorage.removeItem("isAuthenticated");
+    sessionStorage.removeItem("id");
   };
 
   const signUp = () => {};
@@ -41,7 +44,6 @@ export const Provider = (props) => {
         actions: {
           signIn: signIn,
           signOut: signOut,
-          userData: userData,
           signUp: signUp,
         },
       }}

@@ -7,7 +7,6 @@ export default function UserSignIn() {
   const [password, setPassword] = useState("");
 
   const { actions } = useContext(UserContext);
-  console.log(actions);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,8 +53,7 @@ export default function UserSignIn() {
           </Link>
         </form>
         <p>
-          Don't have a user account? Click here to{" "}
-          <Link to="/signup">sign up</Link>!
+          Don't have a user account? Click here to <Link to="/">sign up</Link>!
         </p>
       </article>
     </>
