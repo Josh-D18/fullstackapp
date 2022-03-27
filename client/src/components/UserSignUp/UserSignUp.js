@@ -4,7 +4,13 @@ export default function UserSignUp() {
     <>
       <div className="form--centered">
         <h2>Sign Up</h2>
-
+        <div className="validation--errors">
+          <h3>Validation Errors</h3>
+          <ul>
+            <li>Please provide a value for "Title"</li>
+            <li>Please provide a value for "Description"</li>
+          </ul>
+        </div>
         <form>
           <label htmlFor="firstName">First Name</label>
           <input id="firstName" name="firstName" type="text" defaultValue="" />

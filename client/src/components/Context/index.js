@@ -16,9 +16,11 @@ export const Provider = (props) => {
       })
       .then((res) => {
         setUserData(res.data);
-        sessionStorage.setItem("Name", userData[0].firstName);
-        sessionStorage.setItem("Email", userData[0].emailAddress);
-        sessionStorage.setItem("isAuthenticated", true);
+        if (userData) {
+          sessionStorage.setItem("Name", userData[0].firstName);
+          sessionStorage.setItem("Email", userData[0].emailAddress);
+          sessionStorage.setItem("isAuthenticated", true);
+        }
       })
       .catch((error) => {
         console.log({ error });
@@ -31,6 +33,8 @@ export const Provider = (props) => {
     sessionStorage.removeItem("isAuthenticated");
   };
 
+  const signUp = () => {};
+
   return (
     <UserContext.Provider
       value={{
@@ -38,6 +42,7 @@ export const Provider = (props) => {
           signIn: signIn,
           signOut: signOut,
           userData: userData,
+          signUp: signUp,
         },
       }}
     >

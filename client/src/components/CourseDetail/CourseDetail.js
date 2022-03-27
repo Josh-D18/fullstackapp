@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function CourseDetail() {
+  const isAuthenticated = sessionStorage.getItem("isAuthenticated");
   return (
     <>
       <div className="wrap">
@@ -47,11 +49,23 @@ export default function CourseDetail() {
       </div>
       <div className="actions--bar">
         <div className="wrap">
-          <Link className="button" to="/">
-            Update Course
-          </Link>
-          <button className="button">Delete Course</button>
-          <button className="button button-secondary">Return to List</button>
+          {isAuthenticated ? (
+            <>
+              <Link className="button" to="/">
+                Update Course
+              </Link>
+              <button className="button">Delete Course</button>
+              <button className="button button-secondary">
+                Return to List
+              </button>
+            </>
+          ) : (
+            <>
+              <button className="button button-secondary">
+                Return to List
+              </button>
+            </>
+          )}
         </div>
       </div>
     </>
