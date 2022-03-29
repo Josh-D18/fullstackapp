@@ -14,6 +14,7 @@ import Header from "./pages/Header/Header";
 function App() {
   return (
     <section className="App">
+      {/* Wrapped Routes In Provider Component. All routes have access to context functions */}
       <Provider>
         <Header />
         <Routes>

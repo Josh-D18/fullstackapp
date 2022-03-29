@@ -75,6 +75,7 @@ export default function UpdateCourse() {
         >
           Update Course
         </h2>
+        {/* Check If Errors Exist */}
         {errors ? (
           <div className="validation--errors">
             <h3>Validation Errors</h3>

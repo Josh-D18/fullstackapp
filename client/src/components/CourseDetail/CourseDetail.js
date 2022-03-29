@@ -11,6 +11,7 @@ export default function CourseDetail() {
   const params = useParams();
   let navigate = useNavigate();
 
+  // Loading Course Detail Info when the screen renders
   useEffect(() => {
     const getCourseDetail = () => {
       axios

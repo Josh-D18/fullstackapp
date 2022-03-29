@@ -6,6 +6,7 @@ export default function PrivateRoute({ Component }) {
 
   return (
     <>
+      {/* Check if User is signed In. If user is signed in, give them access to the page. If not ask them to sign in */}
       {isAuthenticated ? (
         <Component />
       ) : (
