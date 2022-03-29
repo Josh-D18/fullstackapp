@@ -1,12 +1,9 @@
 import { Link } from "react-router-dom";
-import { UserContext } from "../../components/Context/index";
-import { useContext } from "react";
 
 export default function Header() {
   const isAuthenticated = sessionStorage.getItem("isAuthenticated");
   const firstName = sessionStorage.getItem("firstName");
   const lastName = sessionStorage.getItem("lastName");
-  const { actions } = useContext(UserContext);
 
   return (
     <>
@@ -30,7 +27,7 @@ export default function Header() {
                 <li>
                   Welcome, {firstName} {lastName}!
                 </li>
-                <li onClick={() => actions.signOut()}>
+                <li>
                   <Link to="/signout">Sign Out</Link>
                 </li>
               </ul>

@@ -84,12 +84,10 @@ router.get(
 router.post(
   "/api/courses",
   jsonParser,
-  authenticateUser,
   asyncHandler(async (req, res, next) => {
     try {
       const course = await Course.create({
         ...req.body,
-        userId: req.currentUser.id,
       });
       res
         .status(201)
@@ -109,10 +107,9 @@ router.post(
 router.put(
   "/api/courses/:id",
   jsonParser,
-  authenticateUser,
   asyncHandler(async (req, res, next) => {
     const course = await Course.findByPk(req.params.id);
-    if (course.userId == req.currentUser.dataValues.id) {
+    if (course.dataValues.userId == req.body.userId) {
       Course.update(
         {
           ...req.body,
@@ -123,6 +120,7 @@ router.put(
           res.status(204).end();
         })
         .catch((err) => {
+          console.log({ err });
           let errors = [];
           for (let i = 0; i < err.errors.length; i++) {
             errors.push(err.errors[i].message);
@@ -138,7 +136,6 @@ router.put(
 // Delete a course
 router.delete(
   "/api/courses/:id",
-  authenticateUser,
   asyncHandler(async (req, res, next) => {
     try {
       const course = await Course.findByPk(req.params.id);

@@ -22,6 +22,7 @@ export const Provider = (props) => {
         sessionStorage.setItem("id", res.data[0].id);
         sessionStorage.setItem("isAuthenticated", true);
         navigate("/");
+        window.location.reload(false);
       })
       .catch((error) => {
         console.log({ error });
@@ -34,9 +35,9 @@ export const Provider = (props) => {
     sessionStorage.removeItem("Email");
     sessionStorage.removeItem("isAuthenticated");
     sessionStorage.removeItem("id");
+    navigate("/");
+    window.location.reload(false);
   };
-
-  const signUp = () => {};
 
   return (
     <UserContext.Provider
@@ -44,7 +45,6 @@ export const Provider = (props) => {
         actions: {
           signIn: signIn,
           signOut: signOut,
-          signUp: signUp,
         },
       }}
     >

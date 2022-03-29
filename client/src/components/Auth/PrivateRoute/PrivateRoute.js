@@ -9,9 +9,11 @@ export default function PrivateRoute({ Component }) {
       {isAuthenticated ? (
         <Component />
       ) : (
-        <div>
-          <p>You are not logged in. Please Sign In!</p>
-          <button onClick={() => navi("/signin")}>Sign In</button>
+        <div className="wrap center">
+          <p className="space">You are not logged in. Please Sign In!</p>
+          <button className="button" onClick={() => navi("/signin")}>
+            Sign In
+          </button>
         </div>
       )}
     </>

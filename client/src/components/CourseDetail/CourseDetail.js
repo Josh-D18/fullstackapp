@@ -23,10 +23,31 @@ export default function CourseDetail() {
     getCourseDetail();
   }, [params.id]);
 
+  const handleDelete = async () => {
+    await axios
+      .delete(`${URL}/api/courses/${params.id}`)
+      .then(() => {
+        alert("Your Course Has Been Deleted!");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <>
       <div className="wrap">
-        <h2>Course Detail</h2>
+        <h2
+          style={{
+            marginTop: "1rem",
+            marginBottom: "1rem",
+            fontWeight: "bold",
+            fontSize: "2rem",
+          }}
+        >
+          Course Detail
+        </h2>
         <form>
           {courseDetail &&
             [courseDetail].map((course) => {
@@ -35,7 +56,13 @@ export default function CourseDetail() {
                   <div>
                     <h3 className="course--detail--title">Course</h3>
                     <h4 className="course--name">{course.title}</h4>
-                    <p>
+                    <p
+                      style={{
+                        marginTop: "0.1rem",
+                        marginBottom: "1rem",
+                        fontWeight: "bold",
+                      }}
+                    >
                       By {course.User.firstName} {course.User.lastName}
                     </p>
                     <ReactMarkdown>{course.description}</ReactMarkdown>
@@ -63,7 +90,9 @@ export default function CourseDetail() {
               <Link className="button" to={`/courses/${params.id}/update`}>
                 Update Course
               </Link>
-              <button className="button">Delete Course</button>
+              <button onClick={handleDelete} className="button">
+                Delete Course
+              </button>
               <button
                 className="button button-secondary"
                 onClick={() => navigate("/")}

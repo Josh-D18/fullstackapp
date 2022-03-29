@@ -23,7 +23,7 @@ export default function Courses() {
   return (
     <>
       {" "}
-      <div className="wrap main--grid">
+      <div className="wrap main--grid margin">
         {course &&
           course.map((item) => {
             return (
